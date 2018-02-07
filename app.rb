@@ -2,10 +2,12 @@ require 'pusher'
 require 'dotenv'
 Dotenv.load('api_keys.env')
 
-API_KEY = ENV['API_KEY']
-API_SECRET = ENV['API_SECRET']
-
-pusher = Pusher::Client.new app_id: "470789", key: API_KEY, secret: API_SECRET, cluster: 'eu'
+pusher = Pusher::Client.new({
+  app_id: ENV['API_ID'],
+  key: ENV['API_KEY'],
+  secret: ENV['API_SECRET'],
+  cluster: ENV['CLUSTER']
+  })
 
 # trigger on 'my-channel' an event called 'my-event' with this payload:
 
