@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Realtime Notifications</title>
+    <script src="https://js.pusher.com/4.1/pusher.min.js"></script>
+    <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+  </head>
+
+  <body>
+    <div class="notification"></div>
+    <script>
+
+      var pusher = new Pusher('fa1c51d738d6f458f45b', {
+        cluster: 'eu',
+        encrypted: true
+      });
+
+      var notificationsChannel = pusher.subscribe('notifications');
+
+      notificationsChannel.bind('new_notification', function(notification){
+        var message = notification.message;
+        $('div.notification').text(message);
+      });
+
+    </script>
+  </body>
+
+</html>
