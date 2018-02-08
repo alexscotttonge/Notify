@@ -2,8 +2,11 @@
 <html>
   <head>
     <title>Realtime Notifications</title>
-    <script src="https://js.pusher.com/4.1/pusher.min.js"></script>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
     <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script src="https://js.pusher.com/4.1/pusher.min.js"></script>
+
 
   </head>
 
@@ -12,7 +15,6 @@
     <input class="create-notification" placeholder="Send a notification :)"></input>
     <button class="submit-notification">Go!</button>
 
-    <div class="notification"></div>
     <script>
 
       var pusher = new Pusher('fa1c51d738d6f458f45b', {
@@ -24,7 +26,7 @@
 
       notificationsChannel.bind('new_notification', function(notification){
         var message = notification.message;
-        $('div.notification').text(message);
+        toastr.success(message)
       });
 
       var sendNotification = function(){

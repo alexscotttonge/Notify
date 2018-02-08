@@ -1,6 +1,7 @@
 require 'pusher'
 require 'sinatra'
 require 'dotenv'
+require 'cgi'
 Dotenv.load('api_keys.env')
 
 pusher = Pusher::Client.new({
@@ -16,7 +17,7 @@ get '/' do
 end
 
 post '/notification' do
-  message = params[:message]
+  message = CGI.escape_html params[:message]
 
   pusher.trigger('notifications', 'new_notification', {
       message: message
