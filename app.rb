@@ -11,13 +11,14 @@ pusher = Pusher::Client.new({
   encrypted: true
   })
 
-get '/notification' do
-  pusher.trigger('notifications', 'new_notification', {
-      message: 'hello world'
-  })
-  "Notification triggered!"
-end
-
 get '/' do
   erb :index
+end
+
+post '/notification' do
+  message = params[:message]
+
+  pusher.trigger('notifications', 'new_notification', {
+      message: message
+  })
 end
