@@ -6,41 +6,50 @@
     <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <script src="https://js.pusher.com/4.1/pusher.min.js"></script>
-
-
-  </head>
-
-  <body>
-
-    <input class="create-notification" placeholder="Send a notification :)"></input>
-    <button class="submit-notification">Go!</button>
-
     <script>
-
       var pusher = new Pusher('fa1c51d738d6f458f45b', {
         cluster: 'eu',
         encrypted: true
       });
-
-      var notificationsChannel = pusher.subscribe('notifications');
-
-      notificationsChannel.bind('new_notification', function(notification){
-        var message = notification.message;
-        toastr.success(message)
-      });
-
-      var sendNotification = function(){
-		      var text = $('input.create-notification').val();
-		      $.post('/notification', { message: text }, function success(){
-			      console.log('Notification sent!');
-		      });
-	    };
-
-	    $('button.submit-notification').on('click', sendNotification);
-
-      Pusher.logToConsole = true;
-
     </script>
-  </body>
 
+  </head>
+    <body>
+      <input class="success-notification" name="new-notification" placeholder="Send a success notification :)"></input>
+      <button class="submit-notification" value="submit">Go!</button>
+      <script>
+        var notificationsSuccessChannel = pusher.subscribe('success-notifications');
+        notificationsSuccessChannel.bind('success_notification', function(notification){
+          var message = notification.message;
+          toastr.success(message)
+        });
+        var sendNotification = function(){
+  		      var text = $('input.success-notification').val();
+  		      $.post('/notification/success', { message: text }, function success(){
+  			      console.log('Notification sent!');
+  		      });
+  	    };
+  	    $('button.submit-notification').on('click', sendNotification);
+        Pusher.logToConsole = true;
+      </script>
+
+      <input class="info-notification" name="new-notification" placeholder="Send an info notification :)"></input>
+      <button class="submit-notification" value="submit">Go!</button>
+      <script>
+        var notificationsInfoChannel = pusher.subscribe('info-notifications');
+        notificationsInfoChannel.bind('info_notification', function(notification){
+          var message = notification.message;
+          toastr.info(message)
+        });
+        var sendNotification = function(){
+            var text = $('input.info-notification').val();
+            $.post('/notification/info', { message: text }, function success(){
+              console.log('Notification sent!');
+            });
+        };
+        $('button.submit-notification').on('click', sendNotification);
+        Pusher.logToConsole = true;
+      </script>
+
+    </body>
 </html>
