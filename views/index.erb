@@ -2,6 +2,8 @@
 <html>
   <head>
     <title>Realtime Notifications</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/custom.css">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
     <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
@@ -16,54 +18,54 @@
   </head>
     <body>
       <input class="success-notification" name="new-notification" placeholder="Send a success notification :)"></input>
-      <button class="submit-notification" value="submit">Go!</button>
+      <button class="submit-success-notification" value="submit">Go!</button>
       <script>
         var notificationsSuccessChannel = pusher.subscribe('success-notifications');
         notificationsSuccessChannel.bind('success_notification', function(notification){
           var message = notification.message;
           toastr.success(message)
         });
-        var sendNotification = function(){
+        var sendSuccessNotification = function(){
   		      var text = $('input.success-notification').val();
   		      $.post('/notification/success', { message: text }, function success(){
   			      console.log('Notification sent!');
   		      });
   	    };
-  	    $('button.submit-notification').on('click', sendNotification);
+  	    $('button.submit-success-notification').on('click', sendSuccessNotification);
       </script>
 
       <input class="info-notification" name="new-notification" placeholder="Send an info notification :)"></input>
-      <button class="submit-notification" value="submit">Go!</button>
+      <button class="submit-info-notification" value="submit">Go!</button>
       <script>
         var notificationsInfoChannel = pusher.subscribe('info-notifications');
         notificationsInfoChannel.bind('info_notification', function(notification){
           var message = notification.message;
           toastr.info(message)
         });
-        var sendNotification = function(){
+        var sendInfoNotification = function(){
             var text = $('input.info-notification').val();
             $.post('/notification/info', { message: text }, function success(){
               console.log('Notification sent!');
             });
         };
-        $('button.submit-notification').on('click', sendNotification);
+        $('button.submit-info-notification').on('click', sendInfoNotification);
       </script>
 
-      <input class="warning-notification" name="new-notification" placeholder="Send an info notification :)"></input>
-      <button class="submit-notification" value="submit">Go!</button>
+      <input class="warning-notification" name="new-notification" placeholder="Send a warning notification :)"></input>
+      <button class="submit-warning-notification" value="submit">Go!</button>
       <script>
         var notificationsWarningChannel = pusher.subscribe('warning-notifications');
         notificationsWarningChannel.bind('warning_notification', function(notification){
           var message = notification.message;
           toastr.warning(message)
         });
-        var sendNotification = function(){
+        var sendWarningNotification = function(){
             var text = $('input.warning-notification').val();
             $.post('/notification/warning', { message: text }, function success(){
               console.log('Notification sent!');
             });
         };
-        $('button.submit-notification').on('click', sendNotification);
+        $('button.submit-warning-notification').on('click', sendWarningNotification);
       </script>
 
     </body>
