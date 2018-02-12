@@ -18,7 +18,7 @@
   </head>
     <body>
       <input class="success-notification" name="new-notification" placeholder="Send a success notification :)"></input>
-      <button class="submit-success-notification" value="submit">Go!</button>
+      <button class="submit-success-notification btn btn-success" value="submit">Go!</button>
       <script>
         var notificationsSuccessChannel = pusher.subscribe('success-notifications');
         notificationsSuccessChannel.bind('success_notification', function(notification){
@@ -35,7 +35,7 @@
       </script>
 
       <input class="info-notification" name="new-notification" placeholder="Send an info notification :)"></input>
-      <button class="submit-info-notification" value="submit">Go!</button>
+      <button class="submit-info-notification btn btn-info" value="submit">Go!</button>
       <script>
         var notificationsInfoChannel = pusher.subscribe('info-notifications');
         notificationsInfoChannel.bind('info_notification', function(notification){
@@ -52,7 +52,7 @@
       </script>
 
       <input class="warning-notification" name="new-notification" placeholder="Send a warning notification :)"></input>
-      <button class="submit-warning-notification" value="submit">Go!</button>
+      <button class="submit-warning-notification btn btn-warning" value="submit">Go!</button>
       <script>
         var notificationsWarningChannel = pusher.subscribe('warning-notifications');
         notificationsWarningChannel.bind('warning_notification', function(notification){
