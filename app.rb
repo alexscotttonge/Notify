@@ -35,5 +35,13 @@ class App < Sinatra::Base
     })
   end
 
+  post '/notification/warning' do
+    message = CGI.escape_html params[:message]
+
+    pusher.trigger('warning-notifications', 'warning_notification', {
+        message: message
+    })
+  end
+
   run! if app_file == $0
 end

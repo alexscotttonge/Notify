@@ -30,7 +30,6 @@
   		      });
   	    };
   	    $('button.submit-notification').on('click', sendNotification);
-        Pusher.logToConsole = true;
       </script>
 
       <input class="info-notification" name="new-notification" placeholder="Send an info notification :)"></input>
@@ -48,7 +47,23 @@
             });
         };
         $('button.submit-notification').on('click', sendNotification);
-        Pusher.logToConsole = true;
+      </script>
+
+      <input class="warning-notification" name="new-notification" placeholder="Send an info notification :)"></input>
+      <button class="submit-notification" value="submit">Go!</button>
+      <script>
+        var notificationsWarningChannel = pusher.subscribe('warning-notifications');
+        notificationsWarningChannel.bind('warning_notification', function(notification){
+          var message = notification.message;
+          toastr.warning(message)
+        });
+        var sendNotification = function(){
+            var text = $('input.warning-notification').val();
+            $.post('/notification/warning', { message: text }, function success(){
+              console.log('Notification sent!');
+            });
+        };
+        $('button.submit-notification').on('click', sendNotification);
       </script>
 
     </body>
