@@ -1,0 +1,25 @@
+body, html {
+    height: 100%;
+}
+.bg {
+    background-image: url("https://mdbootstrap.com/img/Photos/Horizontal/Nature/full page/img(11).jpg");
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+div.row {
+  margin-top: 75px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+div.col-sm-4 {
+  text-align: center;
+}
+
+div.page-header {
+  text-align: center;
+}

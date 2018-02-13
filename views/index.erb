@@ -17,8 +17,18 @@
 
   </head>
     <body>
-      <input class="success-notification" name="new-notification" placeholder="Send a success notification :)"></input>
+      <div class="bg">
+      <div class="container">
+        <div class="page-header">
+          <h1>Send a notification</h1>
+        </div>
+      </div>
+
+      <div class='row'>
+      <div class="col-sm-4">
+      <input class="success-notification" name="new-notification" placeholder=" Success :)"></input>
       <button class="submit-success-notification btn btn-success" value="submit">Go!</button>
+      </div>
       <script>
         var notificationsSuccessChannel = pusher.subscribe('success-notifications');
         notificationsSuccessChannel.bind('success_notification', function(notification){
@@ -34,8 +44,11 @@
   	    $('button.submit-success-notification').on('click', sendSuccessNotification);
       </script>
 
-      <input class="info-notification" name="new-notification" placeholder="Send an info notification :)"></input>
+      <div class="col-sm-4">
+      <input class="info-notification" name="new-notification" placeholder=" Info :)"></input>
       <button class="submit-info-notification btn btn-info" value="submit">Go!</button>
+      </div>
+
       <script>
         var notificationsInfoChannel = pusher.subscribe('info-notifications');
         notificationsInfoChannel.bind('info_notification', function(notification){
@@ -51,8 +64,11 @@
         $('button.submit-info-notification').on('click', sendInfoNotification);
       </script>
 
-      <input class="warning-notification" name="new-notification" placeholder="Send a warning notification :)"></input>
+      <div class="col-sm-4">
+      <input class="warning-notification" name="new-notification" placeholder=" Warning :)"></input>
       <button class="submit-warning-notification btn btn-warning" value="submit">Go!</button>
+      </div>
+
       <script>
         var notificationsWarningChannel = pusher.subscribe('warning-notifications');
         notificationsWarningChannel.bind('warning_notification', function(notification){
@@ -67,6 +83,7 @@
         };
         $('button.submit-warning-notification').on('click', sendWarningNotification);
       </script>
-
+    </div>
+    </div>
     </body>
 </html>
