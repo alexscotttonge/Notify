@@ -1,6 +1,5 @@
 require 'sinatra/base'
 require 'pusher'
-require 'sinatra'
 require 'dotenv'
 require 'cgi'
 Dotenv.load('api_keys.env')
@@ -20,11 +19,9 @@ class App < Sinatra::Base
   end
 
   post '/notification/success' do
-    message = CGI.escape_html params[:message]
-
-    pusher.trigger('success-notifications', 'success_notification', {
-        message: message
-    })
+     pusher.trigger("success-notifications", "success_notification", {
+       socket_id: params[:socket_id]
+     })
   end
 
   post '/notification/info' do
