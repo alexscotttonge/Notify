@@ -32,6 +32,9 @@
         var notificationsSuccessChannel = pusher.subscribe('success-notifications');
         notificationsSuccessChannel.bind('success_notification', function(notification){
           var message = notification.message;
+          if(!message) {
+            alert('The Pusher connection on this channel is excluded from receiving the message you input');
+          }
           toastr.success(message)
         });
         var sendSuccessNotification = function(){
@@ -54,6 +57,10 @@
         var notificationsInfoChannel = pusher.subscribe('info-notifications');
         notificationsInfoChannel.bind('info_notification', function(notification){
           var message = notification.message;
+          if(!message) {
+            alert('Please supply a chat message');
+            return;
+          }
           if(message == 'iheartnode') {
             alert('you WONDERFUL person')
           }
@@ -77,6 +84,10 @@
         var notificationsWarningChannel = pusher.subscribe('warning-notifications');
         notificationsWarningChannel.bind('warning_notification', function(notification){
           var message = notification.message;
+          if(!message) {
+            alert('Please supply a chat message');
+            return;
+          }
           toastr.warning(message)
         });
         var sendWarningNotification = function(){
