@@ -54,6 +54,9 @@
         var notificationsInfoChannel = pusher.subscribe('info-notifications');
         notificationsInfoChannel.bind('info_notification', function(notification){
           var message = notification.message;
+          if(message == 'iheartnode') {
+            alert('you WONDERFUL person')
+          }
           toastr.info(message)
         });
         var sendInfoNotification = function(){
