@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Notify</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/custom.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+    <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script src="https://js.pusher.com/4.1/pusher.min.js"></script>
+    <script>
+      const pusher = new Pusher('fa1c51d738d6f458f45b', {
+        cluster: 'eu',
+        encrypted: true
+      });
+    </script>
+  </head>
+  <body>
+    <div class="bg">
+      <div class="container">
+        <div class="page-header">
+          <h1>Try sending a notification :)</h1>
+        </div>
+      </div>
+
+      <div class='row'>
+        <div class="col-sm-4">
+          <input class="success-notification" name="new-notification" placeholder=" Filtered :)"></input>
+          <button class="submit-success-notification btn btn-success" value="submit">Go!</button>
+        </div>
+        <script>
+          const notificationsSuccessChannel = pusher.subscribe('success-notifications');
+          notificationsSuccessChannel.bind('success_notification', notification => {
+            const message = notification.message;
+            if (!message) {
+              alert('The Pusher connection on this channel is excluded from receiving the message you input');
+            }
+            toastr.success(message)
+          });
+          const sendSuccessNotification = () => {
+            let socketId = null;
+            socketId = pusher.connection.socket_id;
+            $.post('/notification/success', {
+              socket_id: socketId
+            }, success => {
+              console.log('Notification sent!');
+            });
+          };
+          $('button.submit-success-notification').on('click', sendSuccessNotification);
+        </script>
+
+        <div class="col-sm-4">
+          <input class="info-notification" name="new-notification" placeholder=" Find the Easter egg :)"></input>
+          <button class="submit-info-notification btn btn-info" value="submit">Go!</button>
+        </div>
+
+        <script>
+          const notificationsInfoChannel = pusher.subscribe('info-notifications');
+          notificationsInfoChannel.bind('info_notification', notification => {
+            const message = notification.message;
+            if (!message) {
+              alert('Please supply a chat message');
+              return;
+            }
+            if (message == 'iheartnode') {
+              alert('you WONDERFUL person')
+            }
+            toastr.info(message)
+          });
+          const sendInfoNotification = () => {
+            const text = $('input.info-notification').val();
+            $.post('/notification/info', {
+              message: text
+            }, success => {
+              console.log('Notification sent!');
+            });
+          };
+          $('button.submit-info-notification').on('click', sendInfoNotification);
+        </script>
+
+        <div class="col-sm-4">
+          <input class="warning-notification" name="new-notification" placeholder=" Warning :)"></input>
+          <button class="submit-warning-notification btn btn-warning" value="submit">Go!</button>
+        </div>
+
+        <script>
+          const notificationsWarningChannel = pusher.subscribe('warning-notifications');
+          notificationsWarningChannel.bind('warning_notification', notification => {
+            const message = notification.message;
+            if (!message) {
+              alert('Please supply a chat message');
+              return;
+            }
+            toastr.warning(message)
+          });
+          const sendWarningNotification = () => {
+            const text = $('input.warning-notification').val();
+            $.post('/notification/warning', {
+              message: text
+            }, success => {
+              console.log('Notification sent!');
+            });
+          };
+          $('button.submit-warning-notification').on('click', sendWarningNotification);
+        </script>
+      </div>
+    </div>
+  </body>
+</html>
