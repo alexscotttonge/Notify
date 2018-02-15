@@ -1,8 +1,14 @@
 require 'simplecov'
+require 'rack/test'
+require 'sinatra'
 SimpleCov.start
 
-PROJECT_ROOT = File.expand_path("../..", __FILE__)
+require File.join(File.dirname(__FILE__), '..', 'app.rb')
 
-Dir.glob(File.join(PROJECT_ROOT, "lib", "*.rb")).each do |file|
-  require file
+def app
+  @app ||= App.new
+end
+
+RSpec.configure do |conf|
+  conf.include Rack::Test::Methods
 end

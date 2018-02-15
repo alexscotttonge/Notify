@@ -84,6 +84,8 @@ DEPENDENCIES
   capybara
   dotenv
   pusher
+  rack
+  rack-test
   rake
   rspec
   rubocop

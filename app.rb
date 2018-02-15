@@ -19,16 +19,16 @@ class App < Sinatra::Base
   end
 
   post '/notification/success' do
-     pusher.trigger("success-notifications", "success_notification", {
-       socket_id: params[:socket_id]
-     })
+    pusher.trigger("success-notifications", "success_notification", {
+      socket_id: params[:socket_id]
+    })
   end
 
   post '/notification/info' do
     message = CGI.escape_html params[:message]
 
     pusher.trigger('info-notifications', 'info_notification', {
-        message: message
+      message: message
     })
   end
 
@@ -36,7 +36,7 @@ class App < Sinatra::Base
     message = CGI.escape_html params[:message]
 
     pusher.trigger('warning-notifications', 'warning_notification', {
-        message: message
+      message: message
     })
   end
 
