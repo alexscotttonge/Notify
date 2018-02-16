@@ -4,7 +4,12 @@ A build of a Pusher app for realtime notifications for HTML5 Apps.
 
 ## Run
 
-```ruby app.rb```
+```
+$ git clone git@github.com:alexscotttonge/Notify
+$ cd Notify
+$ bundle install
+$ ruby app.rb
+```
 
 ## Note
 
@@ -21,3 +26,12 @@ I used RSpec with ```Rack-Test``` for two of the basic API calls. There is furth
 - ```notification/warning```
 
 With further time I would change the testing framework to Capybara which would have allowed me to successfully test each API call.
+
+### Run Tests
+
+Install ```rspec```
+
+```gem install rspec```
+
+Then run tests:
+```$ rspec```
